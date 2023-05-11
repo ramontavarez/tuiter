@@ -54,7 +54,7 @@ const DateTimeFormatter = new Intl.DateTimeFormat(undefined, {
 function TweetCard({ id, user, content, createdAt, likeCount, likedByMe }: Tweet) {
     const trpcUtils = api.useContext();
     const toggleLike = api.tweet.toggleLike.useMutation({
-        onSuccess: async ({ addedLike }) => {
+        onSuccess: ({ addedLike }) => {
             const updatedData: Parameters<typeof trpcUtils.tweet.infiniteFeed.setInfiniteData>[1] = (oldData) => {
                 if (oldData == null) return
                 const countModifier = addedLike ? 1 : -1
